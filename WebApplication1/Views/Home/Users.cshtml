@@ -1,0 +1,18 @@
+﻿@model IEnumerable<User>
+
+@{
+    ViewBag.Title = "title";
+    Layout = "_Layout";
+}
+
+@foreach (var i in Model)
+{
+    <tr>
+        <td width="50%">@i.Name</td>
+        <td width="50%">@i.Birthday</td>
+        <td width="50%">@i.Email</td>
+        <td width="50%">@i.Phone</td>
+    </tr>
+}
+
+

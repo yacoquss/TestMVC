@@ -1,14 +1,17 @@
 ﻿@{
-    ViewData["Title"] = "Home Page";
+    ViewData["Title"] = "Регистрация";
 }
+
+@model User
 
 <!DOCTYPE html>
 <html lang="ru">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Регистрация пользователя</title>
+    <title>@ViewData["Title"]</title>
     <style>
+        /* Стили остаются без изменений */
         .container {
             max-width: 400px;
             margin: 50px auto;
@@ -46,44 +49,54 @@
         button:hover {
             background-color: #45a049;
         }
+
+        .validation-summary-errors {
+            color: red;
+        }
+
+        .field-validation-error {
+            color: red;
+            font-size: 0.9em;
+        }
     </style>
 </head>
 <body>
 <div class="container">
     <h2>Регистрация</h2>
-    <form action="/register" method="POST">
+    <form asp-action="Create" asp-controller="Home" method="post">
+        <div asp-validation-summary="ModelOnly" class="validation-summary-errors"></div>
+
         <div class="form-group">
-            <label for="username">Имя пользователя:</label>
-            <input type="text" id="username" name="username" required>
+            <label asp-for="Name">Имя пользователя:</label>
+            <input asp-for="Name" type="text" id="username">
+            <span asp-validation-for="Name" class="field-validation-error"></span>
         </div>
 
         <div class="form-group">
-            <label for="email">Email:</label>
-            <input type="email" id="email" name="email" required>
+            <label asp-for="Email">Email:</label>
+            <input asp-for="Email" type="email" id="email">
+            <span asp-validation-for="Email" class="field-validation-error"></span>
+        </div>
+
+       
+        <div class="form-group">
+            <label asp-for="Birthday">Дата рождения:</label>
+            <input asp-for="Birthday" type="date" id="birthdate">
+            <span asp-validation-for="Birthday" class="field-validation-error"></span>
         </div>
 
         <div class="form-group">
-            <label for="password">Пароль:</label>
-            <input type="password" id="password" name="password" required minlength="6">
-        </div>
-
-        <div class="form-group">
-            <label for="confirm_password">Подтвердите пароль:</label>
-            <input type="password" id="confirm_password" name="confirm_password" required>
-        </div>
-
-        <div class="form-group">
-            <label for="birthdate">Дата рождения:</label>
-            <input type="date" id="birthdate" name="birthdate">
-        </div>
-
-        <div class="form-group">
-            <label for="phone">Телефон:</label>
-            <input type="tel" id="phone" name="phone" pattern="[0-9]{10}">
+            <label asp-for="Phone">Телефон:</label>
+            <input asp-for="Phone" type="tel" id="phone" pattern="[0-9]{10}">
+            <span asp-validation-for="Phone" class="field-validation-error"></span>
         </div>
 
         <button type="submit">Зарегистрироваться</button>
     </form>
 </div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}
 </body>
 </html>
