@@ -11,4 +11,6 @@ public class User
     public string Birthday { get; set; } = string.Empty;
     
     public string Phone { get; set; } = string.Empty;
+    
+    
 }
